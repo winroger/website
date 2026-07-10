@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - master
   workflow_dispatch:
 
 permissions:
@@ -42,6 +43,12 @@ jobs:
         env:
           HUGO_BASEURL: ${{ steps.pages.outputs.base_url }}
         run: hugo --gc --minify --baseURL "$HUGO_BASEURL"
+
+      - name: Ensure index exists
+        run: test -f public/index.html
+
+      - name: Add .nojekyll
+        run: touch public/.nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
