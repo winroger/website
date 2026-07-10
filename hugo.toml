@@ -1,0 +1,50 @@
+baseURL = "https://www.rogerwinkler.de/"
+locale = "de-DE"
+title = "Roger Winkler"
+theme = "enervoid-theme"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term", "RSS"]
+
+[menus]
+  [[menus.main]]
+    name = "Work"
+    pageRef = "/work"
+    weight = 10
+  [[menus.main]]
+    name = "Research"
+    pageRef = "/research"
+    weight = 20
+
+[params]
+  description = "Roger Winkler"
+  title = "Roger Winkler"
+  avatar = "/wp-content/uploads/2025/12/Foto-876x1024.png"
+
+  [[params.socials]]
+    name = "GitHub"
+    link = "https://github.com/winroger"
+    icon = "devicon-github-original"
+
+  [[params.socials]]
+    name = "LinkedIn"
+    link = "https://www.linkedin.com/in/rogerwinkler/"
+    icon = "devicon-linkedin-plain"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions.passthrough]
+      enable = true
+      [markup.goldmark.extensions.passthrough.delimiters]
+        block = [['$$','$$'], ['\\[','\\]']]
+        inline = [['$','$'], ['\\(','\\)']]
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    noClasses = true
+    codeFences = true
+    guessSyntax = true
+    tabWidth = 4
+    style = "monokai"
