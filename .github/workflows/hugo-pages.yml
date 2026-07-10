@@ -20,6 +20,9 @@ defaults:
   run:
     shell: bash
 
+env:
+  HUGO_DESTINATION: dist
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -40,18 +43,18 @@ jobs:
           extended: true
 
       - name: Build with Hugo
-        run: hugo --gc --minify
+        run: hugo --gc --minify --destination "$HUGO_DESTINATION"
 
       - name: Ensure index exists
-        run: test -f public/index.html
+        run: test -f "$HUGO_DESTINATION/index.html"
 
       - name: Add .nojekyll
-        run: touch public/.nojekyll
+        run: touch "$HUGO_DESTINATION/.nojekyll"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./public
+          path: ./${{ env.HUGO_DESTINATION }}
 
   deploy:
     environment:
